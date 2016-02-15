@@ -1,0 +1,22 @@
+{
+  "name": "daviszeng/kv-data-access-layer",
+  "description": "Key Value Data Access Layer",
+  "type": "library",
+  "require-dev": {
+    "phpunit/phpunit": "5.1"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Davis Zeng",
+      "email": "DavisZeng@outlook.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "KVDataAccessLayer\\": "src/KVDataAccessLayer"
+    }
+  }
+}
