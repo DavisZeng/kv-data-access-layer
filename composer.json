@@ -13,9 +13,9 @@
       "email": "DavisZeng@outlook.com"
     }
   ],
-  "minimum-stability": "0.1",
+  "minimum-stability": "beta",
   "require": {
-    "php": ">=php7.0"
+    "php": ">=7.0"
   },
   "suggest": {
     "laruence/yaconf": "Yet Another Configure."
