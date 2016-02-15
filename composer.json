@@ -3,6 +3,7 @@
   "description": "Key Value Data Access Layer",
   "type": "library",
   "require-dev": {
+    "php": ">=php7.0",
     "phpunit/phpunit": "5.1"
   },
   "license": "MIT",
@@ -12,8 +13,13 @@
       "email": "DavisZeng@outlook.com"
     }
   ],
-  "minimum-stability": "dev",
-  "require": {},
+  "minimum-stability": "0.1",
+  "require": {
+    "php": ">=php7.0"
+  },
+  "suggest": {
+    "laruence/yaconf": "Yet Another Configure."
+  },
   "autoload": {
     "psr-4": {
       "KVDataAccessLayer\\": "src/KVDataAccessLayer"
