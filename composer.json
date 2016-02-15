@@ -15,7 +15,7 @@
   ],
   "minimum-stability": "beta",
   "require": {
-    "php": ">=7.0"
+    "php": ">=7.0.x"
   },
   "suggest": {
     "laruence/yaconf": "Yet Another Configure."
