@@ -153,7 +153,7 @@ abstract class CacheModel extends ModelAbstract
                 if ($value !== false) {
                     $value = $value->toArray();
                     $this->fromArray($value)->setDirty(false);
-                    $this->source()->set($this->generateUniqueKey($key), json_encode($value));
+                    $this->cache()->set($this->generateUniqueKey($key), json_encode($value));
 
                     return $this;
                 }
