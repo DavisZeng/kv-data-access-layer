@@ -45,7 +45,6 @@ class UserProfileLBDBModelTest extends \PHPUnit_Framework_TestCase
 
     public function testGet()
     {
-
         $user = UserProfileLBDBModel::model()->get(1)->toArray();
         $this->assertTrue(isset($user['email']));
         $this->assertEquals('daviszeng@outlook.com', $user['email']);
@@ -54,7 +53,7 @@ class UserProfileLBDBModelTest extends \PHPUnit_Framework_TestCase
     public function testSave()
     {
         $attributes = array(
-            'user_id'    => 20,
+            'user_id'    => 2,
             'first_name' => 'Star',
             'last_name'  => 'Jiang',
             'email'      => 'StarJiang@qq.com',
@@ -69,7 +68,7 @@ class UserProfileLBDBModelTest extends \PHPUnit_Framework_TestCase
     {
 
         $attributes = array(
-            'user_id'    => 30,
+            'user_id'    => 3,
             'first_name' => 'Lily',
             'last_name'  => 'Leo',
             'email'      => 'LilyLeo@qq.com',

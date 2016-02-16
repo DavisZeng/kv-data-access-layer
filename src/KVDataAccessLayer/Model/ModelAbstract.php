@@ -8,6 +8,8 @@
 
 namespace KVDataAccessLayer\Model;
 
+use KVDataAccessLayer\Exception\DBModelException;
+
 abstract class ModelAbstract implements \ArrayAccess
 {
     /**
@@ -114,9 +116,15 @@ abstract class ModelAbstract implements \ArrayAccess
      *
      * @author: De-Wu Zeng <dewuzeng@gmail.com>
      * @return array
+     * @throws DBModelException
      */
     public function toArray()
     {
+        $keyName = $this->keyName();
+        if (empty($this->getKey())) {
+            throw new DBModelException('Primary key field ' . $keyName . ' is not set on toArray method in ' . get_called_class());
+        }
+
         return static::$fields;
     }
 
@@ -137,6 +145,78 @@ abstract class ModelAbstract implements \ArrayAccess
         }
 
         return $this;
+    }
+
+    /**
+     *
+     * @author: De-Wu Zeng <dewuzeng@gmail.com>
+     *
+     * @param $method
+     * @param $args
+     *
+     * @return $this|null
+     * @throws DBModelException
+     */
+    public function __call($method, $args)
+    {
+        $action = substr($method, 0, 3);
+        if ($action == 'get') {
+            $field = strtolower(substr($method, 3));
+
+            return $this->$field;
+        } else if ($action == 'set') {
+            $field = strtolower(substr($method, 3));
+            $arg   = array_shift($args);
+            if ($this->$field !== $arg) {
+                $this->$field = $arg;
+                $this->dirty  = true;
+            }
+
+            return $this;
+        } else {
+            throw new DBModelException('Call to undefined method ' . $method . '() on __call method in ' . get_called_class());
+        }
+    }
+
+    /**
+     *
+     * @author: De-Wu Zeng <dewuzeng@gmail.com>
+     *
+     * @param $field
+     *
+     * @return mixed
+     * @throws DBModelException
+     */
+    public function __get($field)
+    {
+        if (isset(static::$fields[$field])) {
+            return static::$fields[$field];
+        }
+        throw new DBModelException('Undefined property: Test::$' . $field . ' on __get method in ' . get_called_class());
+    }
+
+    /**
+     *
+     * @author: De-Wu Zeng <dewuzeng@gmail.com>
+     *
+     * @param $field
+     * @param $value
+     *
+     * @return $this
+     * @throws DBModelException
+     */
+    public function __set($field, $value)
+    {
+        if (isset(static::$fields[$field])) {
+            if (static::$fields[$field] != $value) {
+                static::$fields[$field] = $value;
+                $this->dirty            = true;
+            }
+
+            return $this;
+        }
+
+        throw new DBModelException('Undefined property: Test::' . $field . ' on __set method in ' . get_called_class());
     }
 
     /**

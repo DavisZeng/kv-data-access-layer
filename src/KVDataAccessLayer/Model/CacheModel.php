@@ -82,7 +82,11 @@ abstract class CacheModel extends ModelAbstract
         return false;
     }
 
-
+    /**
+     *
+     * @author: De-Wu Zeng <dewuzeng@gmail.com>
+     * @return null|string
+     */
     protected function getKeyPrefix()
     {
         if (!$this->keyPrefix) {
@@ -92,6 +96,14 @@ abstract class CacheModel extends ModelAbstract
         return $this->keyPrefix;
     }
 
+    /**
+     *
+     * @author: De-Wu Zeng <dewuzeng@gmail.com>
+     *
+     * @param $key
+     *
+     * @return string
+     */
     protected function generateUniqueKey($key)
     {
         $this->setKey($key);
@@ -100,6 +112,12 @@ abstract class CacheModel extends ModelAbstract
         return $this->hashKey ? md5($keyPrefix . $key) : $keyPrefix . $key;
     }
 
+    /**
+     *
+     * @author: De-Wu Zeng <dewuzeng@gmail.com>
+     * @return bool
+     * @throws \KVDataAccessLayer\Exception\DBModelException
+     */
     public function save()
     {
         $key   = $this->getKey();
@@ -114,6 +132,14 @@ abstract class CacheModel extends ModelAbstract
         return true;
     }
 
+    /**
+     *
+     * @author: De-Wu Zeng <dewuzeng@gmail.com>
+     *
+     * @param $key
+     *
+     * @return $this|bool
+     */
     public function get($key)
     {
         $value = $this->cache()->get($this->generateUniqueKey($key));

@@ -16,11 +16,24 @@ abstract class LBDBModel extends ModelAbstract
 
     abstract public function pdos();
 
+    /**
+     *
+     * @author: De-Wu Zeng <dewuzeng@gmail.com>
+     * @return string
+     */
     protected function tableName()
     {
         return strtolower(get_class($this));
     }
 
+    /**
+     *
+     * @author: De-Wu Zeng <dewuzeng@gmail.com>
+     *
+     * @param $key
+     *
+     * @return int
+     */
     protected function index($key)
     {
         $defaultValue = static::$fields[$this->keyName()];
@@ -29,6 +42,12 @@ abstract class LBDBModel extends ModelAbstract
         return $key % count($this->pdos());
     }
 
+    /**
+     *
+     * @author: De-Wu Zeng <dewuzeng@gmail.com>
+     * @return mixed
+     * @throws DBModelException
+     */
     public function save()
     {
         $pdos = $this->pdos();
@@ -47,6 +66,15 @@ abstract class LBDBModel extends ModelAbstract
         }
     }
 
+    /**
+     *
+     * @author: De-Wu Zeng <dewuzeng@gmail.com>
+     *
+     * @param $key
+     *
+     * @return $this|bool
+     * @throws DBModelException
+     */
     public function get($key)
     {
         $pdos = $this->pdos();
@@ -72,6 +100,15 @@ abstract class LBDBModel extends ModelAbstract
         return false;
     }
 
+    /**
+     *
+     * @author: De-Wu Zeng <dewuzeng@gmail.com>
+     *
+     * @param $key
+     *
+     * @return bool
+     * @throws DBModelException
+     */
     public function delete($key)
     {
         $pdos = $this->pdos();
