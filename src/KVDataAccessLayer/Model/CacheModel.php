@@ -151,6 +151,7 @@ abstract class CacheModel extends ModelAbstract
             if ($this->persist() && $this->source()) {
                 $value = $this->source()->get($key);
                 if ($value !== false) {
+                    $value = $value->toArray();
                     $this->fromArray($value)->setDirty(false);
                     $this->source()->set($this->generateUniqueKey($key), json_encode($value));
 
